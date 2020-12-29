@@ -15,15 +15,19 @@ function App() {
           <Route exact path="/services" component={() => <div>Services</div>} />
           <Route
             exact
-            path="/customsoftware"
+            path="/custom-software-development"
             component={() => <div>customsoftware</div>}
           />
           <Route
             exact
-            path="/mobileapps"
+            path="/mobile-app-development"
             component={() => <div>mobileapps</div>}
           />
-          <Route exact path="/websites" component={() => <div>websites</div>} />
+          <Route
+            exact
+            path="/website-development"
+            component={() => <div>websites</div>}
+          />
           <Route
             exact
             path="/revolution"
