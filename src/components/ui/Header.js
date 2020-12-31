@@ -163,7 +163,7 @@ export default function Header(props) {
         selectedIndex: 0,
       },
       {
-        name: 'Mobile App Development',
+        name: 'iOS/Android Development',
         link: '/mobile-app-development',
         activeIndex: 1,
         selectedIndex: 0,

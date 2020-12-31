@@ -10,6 +10,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import animationData from '../animations/landinganimation/data';
 import customSoftwareIcon from '../assets/Custom Software Icon.svg';
+import mobileAppsIcon from '../assets/mobileIcon.svg';
 
 const useStyles = makeStyles((theme) => ({
   animation: {
@@ -63,7 +64,6 @@ const useStyles = makeStyles((theme) => ({
   },
   learnButton: {
     ...theme.typography.learnButton,
-    height: '0.7rem',
     height: 35,
     padding: 5,
     [theme.breakpoints.down('sm')]: {
@@ -137,7 +137,7 @@ export default function LandingPage() {
           </Grid>
         </Grid>
       </Grid>
-      {/* ---------- Services Block ---------- */}
+      {/* ---------- Custom Software Block ---------- */}
       <Grid item className={classes.serviceContainer}>
         <Grid
           container
@@ -172,6 +172,45 @@ export default function LandingPage() {
             <img
               className={classes.icon}
               src={customSoftwareIcon}
+              alt="custom software icon"
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+      {/* ---------- iOS/Android Block ---------- */}
+      <Grid item>
+        <Grid
+          container
+          direction="row"
+          justify={matchesSM ? 'center' : 'flex-end'}
+        >
+          <Grid
+            item
+            style={{
+              textAlign: matchesSM ? 'center' : undefined,
+            }}
+          >
+            <Typography variant="h4">iOS/Android App Development</Typography>
+            <Typography variant="subtitle1" className={classes.subtitle}>
+              Extend Functionality. Extend Access. Increase Engagement.
+            </Typography>
+            <Typography variant="subtitle1">
+              Integrate your web experience or create a standalone app
+              {matchesSM ? null : <br />} with either mobile platform.
+            </Typography>
+            <Button className={classes.learnButton} variant="outlined">
+              <span style={{ marginRight: 10 }}>Learn More</span>
+              <ButtonArrow
+                width={10}
+                height={10}
+                fill={theme.palette.common.blue}
+              />
+            </Button>
+          </Grid>
+          <Grid item style={{ marginRight: matchesSM ? 0 : '5em' }}>
+            <img
+              className={classes.icon}
+              src={mobileAppsIcon}
               alt="custom software icon"
             />
           </Grid>
