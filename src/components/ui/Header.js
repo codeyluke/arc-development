@@ -127,13 +127,11 @@ export default function Header(props) {
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [value, setValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleChange = (e, newValue) => {
-    setValue(newValue);
+    props.setValue(newValue);
   };
 
   const handleClick = (e) => {
@@ -149,7 +147,7 @@ export default function Header(props) {
   const handleMenuItemClick = (e, i) => {
     setAnchorEl(null);
     setOpenMenu(false);
-    setSelectedIndex(i);
+    props.setSelectedIndex(i);
   };
 
   const menuOptions = useMemo(
@@ -203,10 +201,13 @@ export default function Header(props) {
     [...menuOptions, ...routes].forEach((route) => {
       switch (window.location.pathname) {
         case `${route.link}`:
-          if (value !== route.activeIndex) {
-            setValue(route.activeIndex);
-            if (route.selectedIndex && route.selectedIndex !== selectedIndex) {
-              setSelectedIndex(route.selectedIndex);
+          if (props.value !== route.activeIndex) {
+            props.setValue(route.activeIndex);
+            if (
+              route.selectedIndex &&
+              route.selectedIndex !== props.selectedIndex
+            ) {
+              props.setSelectedIndex(route.selectedIndex);
             }
           }
           break;
@@ -214,13 +215,13 @@ export default function Header(props) {
           break;
       }
     });
-  }, [value, menuOptions, selectedIndex, routes]);
+  }, [props.value, menuOptions, props.selectedIndex, routes, props]);
 
   const tabs = (
     <React.Fragment>
       <Tabs
         className={classes.tabContainer}
-        value={value}
+        value={props.value}
         onChange={handleChange}
         indicatorColor="primary"
       >
@@ -264,12 +265,12 @@ export default function Header(props) {
             onClick={(e) => {
               handleMenuItemClick(e, i);
               handleClose();
-              setValue(1);
+              props.setValue(1);
             }}
             component={Link}
             to={option.link}
             classes={{ root: classes.menuItem }}
-            selected={i === selectedIndex && value === 1}
+            selected={i === props.selectedIndex && props.value === 1}
           >
             {option.name}
           </MenuItem>
@@ -298,12 +299,12 @@ export default function Header(props) {
               divider
               button
               component={Link}
-              selected={value === route.activeIndex}
+              selected={props.value === route.activeIndex}
               classes={{ selected: classes.drawerItemSelected }}
               to={route.link}
               onClick={() => {
                 setOpenDrawer(false);
-                setValue(route.activeIndex);
+                props.setValue(route.activeIndex);
               }}
             >
               <ListItemText disableTypography className={classes.drawerItem}>
@@ -315,7 +316,7 @@ export default function Header(props) {
           <ListItem
             onClick={() => {
               setOpenDrawer(false);
-              setValue(5);
+              props.setValue(5);
             }}
             divider
             button
@@ -326,7 +327,7 @@ export default function Header(props) {
               selected: classes.drawerItemSelected,
             }}
             to="/estimate"
-            selected={value === 5}
+            selected={props.value === 5}
           >
             <ListItemText disableTypography className={classes.drawerItem}>
               Free Estimate
@@ -355,7 +356,7 @@ export default function Header(props) {
               component={Link}
               to="/"
               disableRipple
-              onClick={() => setValue(0)}
+              onClick={() => props.setValue(0)}
               className={classes.logoContainer}
             >
               <img src={logo} alt="company logo" className={classes.logo} />
