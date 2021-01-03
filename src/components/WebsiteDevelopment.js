@@ -1,5 +1,4 @@
 import React from 'react';
-import Lottie from 'react-lottie';
 import { Link } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/Button';
@@ -177,7 +176,6 @@ export default function WebsiteDevelopment(props) {
               <Typography
                 variant="h4"
                 gutterBottom
-                align="center"
                 align={matchesSM ? 'center' : undefined}
               >
                 E-Commerce
@@ -261,7 +259,6 @@ export default function WebsiteDevelopment(props) {
               <Typography
                 variant="h4"
                 gutterBottom
-                align="center"
                 align={matchesSM ? 'center' : undefined}
               >
                 Search Engine <br /> Optimization
