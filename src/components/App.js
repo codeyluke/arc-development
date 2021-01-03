@@ -3,9 +3,10 @@ import { ThemeProvider } from '@material-ui/styles';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import theme from './ui/Theme';
-import Header from '../components/ui/Header';
-import Footer from '../components/ui/Footer';
+import Header from './ui/Header';
+import Footer from './ui/Footer';
 import LandingPage from './LandingPage';
+import Services from './Services';
 
 function App() {
   const [value, setValue] = useState(0);
@@ -32,7 +33,17 @@ function App() {
               />
             )}
           />
-          <Route exact path="/services" component={() => <div>Services</div>} />
+          <Route
+            exact
+            path="/services"
+            render={(props) => (
+              <Services
+                {...props}
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            )}
+          />
           <Route
             exact
             path="/custom-software-development"
