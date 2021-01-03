@@ -11,6 +11,7 @@ import CustomSoftware from './CustomSoftware';
 import MobileApps from './MobileApps';
 import WebsiteDevelopment from './WebsiteDevelopment';
 import Revolution from './Revolution';
+import About from './About';
 
 function App() {
   const [value, setValue] = useState(0);
@@ -81,8 +82,8 @@ function App() {
               />
             )}
           />
-          <Route exact path="/revolution" render={(props) => <Revolution />} />
-          <Route exact path="/about" component={() => <div>about</div>} />
+          <Route exact path="/revolution" component={Revolution} />
+          <Route exact path="/about" component={About} />
           <Route exact path="/contact" component={() => <div>contact</div>} />
           <Route exact path="/estimate" component={() => <div>estimate</div>} />
         </Switch>
