@@ -3,9 +3,9 @@
     "javascript": "javascriptreact"
   }​​​​​​​​,
   "editor.tabSize": 2,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "[javascript]": {​​​​​​​​
     "editor.defaultFormatter": "esbenp.prettier-vscode",
   }​​​​​​​​,
-  "prettier.singleQuote": true,
+  "prettier.singleQuote": false,
 }​​​​​​​​
