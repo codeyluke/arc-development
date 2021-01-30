@@ -22,36 +22,109 @@ let mailOptions = {
 
 exports.sendMail = functions.https.onRequest((request, response) => {
   cors(request, response, () => {
-    const {name, phone, email, message} = request.query;
-    mailOptions = {
-      ...mailOptions,
-      to: email,
-      subject: "Message Received",
-      html: `
-    <P style="font-size: 16px">From: ${name}</p>
-    <P style="font-size: 16px">Email: ${email}</p>
-    <P style="font-size: 16px">Phone Number: ${phone}</p>
-    <P style="font-size: 16px">Message: ${message}</p>
-    `,
-    };
-    transporter.sendMail(mailOptions, (error) => {
-      if (error) {
-        response.send(error);
+    const {
+      name,
+      phone,
+      email,
+      message,
+      total,
+      service,
+      platforms,
+      features,
+      customFeatures,
+      users,
+      category,
+    } = request.query;
+
+    if (total) {
+      if (category) {
+        mailOptions = {
+          ...mailOptions,
+          to: email,
+          subject: "Estimate Received!",
+          html: `
+            <P style="font-size: 16px">From: ${name}</p>
+            <P style="font-size: 16px">Email: ${email}</p>
+            <P style="font-size: 16px">Phone Number: ${phone}</p>
+            <P style="font-size: 16px">Total: ${total}</p>
+            <P style="font-size: 16px">Service: ${service}</p>
+            <P style="font-size: 16px">Category: ${category}</p>
+          `,
+        };
       } else {
-        response.send("Message sent successfully");
+        mailOptions = {
+          ...mailOptions,
+          to: email,
+          subject: "Estimate Received!",
+          html: `
+            <P style="font-size: 16px">From: ${name}</p>
+            <P style="font-size: 16px">Email: ${email}</p>
+            <P style="font-size: 16px">Phone Number: ${phone}</p>
+            <P style="font-size: 16px">Total: ${total}</p>
+            <P style="font-size: 16px">Service: ${service}</p>
+            <P style="font-size: 16px">Platforms: ${platforms}</p>
+            <P style="font-size: 16px">Features: ${features}</p>
+            <P style="font-size: 16px">Custom Features: ${customFeatures}</p>
+            <P style="font-size: 16px">Users: ${users}</p>
+          `,
+        };
       }
-    });
-    mailOptions = {
-      ...mailOptions,
-      to: email,
-      subject: "Message Received OK",
-      html: `
-    <P style="font-size: 16px">From: ${name}</p>
-    <P style="font-size: 16px">Email: ${email}</p>
-    <P style="font-size: 16px">Phone Number: ${phone}</p>
-    <P style="font-size: 16px">Message: ${message}</p>
-    `,
-    };
-    transporter.sendMail(mailOptions);
+
+      transporter.sendMail(mailOptions, (error) => {
+        if (error) {
+          response.send(error);
+        } else {
+          response.send("Message sent successfully");
+        }
+      });
+
+
+      mailOptions = {
+        ...mailOptions,
+        to: email,
+        subject: "Thanks for placing your estimate request!",
+        html: `
+          <P style="font-size: 16px">From: ${name}</p>
+          <P style="font-size: 16px">Email: ${email}</p>
+          <P style="font-size: 16px">Phone Number: ${phone}</p>
+          <P style="font-size: 16px">Message: ${message}</p>
+        `,
+      };
+      transporter.sendMail(mailOptions);
+    } else {
+      mailOptions = {
+        ...mailOptions,
+        to: email,
+        subject: "Message Received",
+        html: `
+          <P style="font-size: 16px">From: ${name}</p>
+          <P style="font-size: 16px">Email: ${email}</p>
+          <P style="font-size: 16px">Phone Number: ${phone}</p>
+          <P style="font-size: 16px">Message: ${message}</p>
+        `,
+      };
+
+      transporter.sendMail(mailOptions, (error) => {
+        if (error) {
+          response.send(error);
+        } else {
+          response.send("Message sent successfully");
+        }
+      });
+
+      mailOptions = {
+        ...mailOptions,
+        to: email,
+        subject: "Message Received OK",
+        html: `
+          <P style="font-size: 16px">From: ${name}</p>
+          <P style="font-size: 16px">Email: ${email}</p>
+          <P style="font-size: 16px">Phone Number: ${phone}</p>
+          <P style="font-size: 16px">Message: ${message}</p>
+        `,
+      };
+
+      transporter.sendMail(mailOptions);
+    }
   });
 });

@@ -299,6 +299,7 @@ export default function Contact(props) {
                 rows={10}
                 fullWidth
                 className={classes.message}
+                placeholder="Tell us more about your project"
                 id="message"
                 onChange={(e) => {
                   setMessage(e.target.value);
